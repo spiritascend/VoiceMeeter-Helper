@@ -1,8 +1,0 @@
-﻿  dllmain.cpp
-C:\Users\M1\source\repos\VoiceMeeterTest\VoiceMeeterTest\dllmain.cpp(36,14): warning C4834: discarding return value of function with 'nodiscard' attribute
-  Generating code
-  2 of 139 functions ( 1.4%) were compiled, the rest were copied from previous compilation.
-    0 functions were new in current compilation
-    1 functions had inline decision re-evaluated but remain unchanged
-  Finished generating code
-  VoiceMeeterTest.vcxproj -> C:\Users\M1\source\repos\VoiceMeeterTest\x64\Release\VoiceMeeterTest.dll
