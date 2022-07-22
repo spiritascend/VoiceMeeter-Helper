@@ -25,16 +25,21 @@ DWORD WINAPI PatchThread(LPVOID) {
     for (auto bytarrnum = arr.begin(); bytarrnum != arr.end(); ++bytarrnum)
     {
         std::cout << "Patched:  " << "0x" << std::hex << *bytarrnum << std::endl;
-        char byts[] = "\x83\x3D\x9B\x00\x20\x00\x01";
-        // Turns out it was protected changing entitlements and then setting the old entitlements back after the patch.
+        char byts[] = "\x83\x3D\x9B\x00\x20\x00\x01"; // cmp DWORD PTR [rip+0x20009b],0x1
+
+
+        // Turns out it was protected (changed entitlements and then setting the old entitlements back after the patch.)
         VirtualProtect((LPVOID)((uintptr_t)*bytarrnum), 7, PAGE_EXECUTE_READWRITE, &RefProt);
         memcpy((LPVOID)*bytarrnum, byts, 7);
         VirtualProtect((LPVOID)(*bytarrnum), 7, RefProt, NULL);
     }
 
     // Applies Patch which makes it seem like you are activated already when you try to activate.
+
+
     uintptr_t CongAddy = BaseAddress + 0x10E71;
-    char congbts[] = "\x83\xB8\xF0\x0C\x00\x00\x00";
+    char congbts[] = "\x83\xB8\xF0\x0C\x00\x00\x00"; //cmp DWORD PTR [rax+0xcf0],0x0
+
     VirtualProtect((LPVOID)((uintptr_t)CongAddy), 7, PAGE_EXECUTE_READWRITE, &RefProt);
     memcpy((LPVOID)(uintptr_t)CongAddy, congbts, 7);
     VirtualProtect((LPVOID)(CongAddy), 7, RefProt, NULL);
