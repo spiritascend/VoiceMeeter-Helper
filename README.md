@@ -1,6 +1,6 @@
 #ARE YOU TIRED OF THIS?!
-![ARE YOU TIRED OF THIS?!](Pitch1.png)
+![ARE YOU TIRED OF THIS?!](Pitch1.PNG)
 
 
 #OR THIS?!
-![OR THIS?!](Pitch1.png)
+![OR THIS?!](Pitch1.PNG)
