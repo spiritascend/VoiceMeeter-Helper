@@ -9,7 +9,7 @@
 // Make sure DLL name is Mfplat.dll;
 
 
-bool debug = true;
+bool debug = false;
 unsigned long RefProt;
 iterable_queue<uintptr_t> arr;
 
@@ -18,6 +18,12 @@ iterable_queue<uintptr_t> arr;
 
 DWORD WINAPI PatchThread(LPVOID) 
 {
+    if (debug)
+    {
+        AllocConsole();
+        FILE* pFile;
+        freopen_s(&pFile, "CONOUT$", "w", stdout);
+    }
     arr.push((uintptr_t)mem::FindPattern("83 3D 9B 00 20 00 00"));
     arr.push((uintptr_t)mem::FindPattern("44 39 2D 48 0B 20 00"));
     arr.push((uintptr_t)mem::FindPattern("44 39 2D 43 0B 20 00"));
@@ -42,23 +48,10 @@ DWORD WINAPI PatchThread(LPVOID)
 }
 
 
-DWORD WINAPI MainThread(LPVOID) 
-{
-    if (debug)
-    {
-        AllocConsole();
-        FILE* pFile;
-        freopen_s(&pFile, "CONOUT$", "w", stdout);
-    }
-    CreateThread(0, 0, PatchThread, 0, 0, 0);
-    return 0;
-}
-
-
 BOOL APIENTRY DllMain(HMODULE mod, DWORD reason, LPVOID res)
 {
     if (reason == DLL_PROCESS_ATTACH)
-        CreateThread(0, 0, MainThread, mod, 0, 0);
+        CreateThread(0, 0, PatchThread, mod, 0, 0);
 
     return TRUE;
 }
