@@ -2,3 +2,17 @@
 *.vsidx
 *.db
 *.ipch
+*.tlog
+*.recipe
+*.pdb
+*.obj
+*.iobj
+*.ipdb
+*.log
+*.pch
+*.dll
+*.db-shm
+*.db-wal
+*.opendb
+.vs/VoiceMeeterTest/v17/.suo
+*.lock
